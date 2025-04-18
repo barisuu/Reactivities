@@ -7,17 +7,20 @@ import ActivityDashboard from '../../features/activities/dashboard/ActivityDashb
 function App() {
     const [activities, setActivities] = useState<Activity[]>([]);
     const [selectedActivity, setSelectedActivity] = useState<Activity | undefined>(undefined);
-    const [createActivityStatus, setCreateActivityStatus] = useState<boolean>(false);
+    const [editMode, setEditMode] = useState(false);
 
     useEffect(() => {
         axios.get<Activity[]>('https://localhost:5001/api/activities').then(response => setActivities(response.data))
     }, [])
     
-    const handleCreateActivityOn = () => {
-        setCreateActivityStatus(true);
+    const handleOpenForm = (id?: string) => {
+        if(id) handleSelectActivity(id)
+        else handleCancelSelectActivity()
+        setEditMode(true);
     }
-    const handleCreateActivityOff = () => {
-        setCreateActivityStatus(false);
+    
+    const handleFormClose = () => {
+        setEditMode(false);
     }
     
     const handleSelectActivity = (id: string) => {
@@ -31,16 +34,17 @@ function App() {
     return (
         <Box sx={{bgcolor: 'rgb(19,37,90)'}}>
             <CssBaseline/>
-            <NavBar 
-                createActivityOn={handleCreateActivityOn}
+            <NavBar
+                openForm = {handleOpenForm}
             />
             <Container maxWidth="xl" sx={{mt: 3}}>
                 <ActivityDashboard activities={activities} 
                                    selectActivity={handleSelectActivity} 
                                    cancelSelectActivity={handleCancelSelectActivity}
                                    selectedActivity={selectedActivity}
-                                   createActivityOff={handleCreateActivityOff}
-                                   createActivityStatus={createActivityStatus}
+                                   openForm = {handleOpenForm}
+                                   closeForm = {handleFormClose}
+                                   editMode = {editMode}
                 />
             </Container>
         </Box>

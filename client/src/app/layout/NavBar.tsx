@@ -2,10 +2,10 @@
 import {AppBar, Box, Button, Container, MenuItem, Toolbar, Typography} from "@mui/material";
 
 type Props = {
-    createActivityOn: () => void
+    openForm : () => void;
 }
 
-export default function NavBar({createActivityOn}: Props) {
+export default function NavBar({openForm}: Props) {
     return (
         <Box sx={{ flexGrow: 1 }}>
             <AppBar position="static" sx={{
@@ -29,7 +29,7 @@ export default function NavBar({createActivityOn}: Props) {
                                 Contact
                             </MenuItem>
                         </Box>
-                        <Button size="large" variant={"contained"} color={"warning"} onClick={createActivityOn}> Create Activity</Button> 
+                        <Button size="large" variant={"contained"} color={"warning"} onClick={() => openForm()}> Create Activity</Button> 
                     </Toolbar>
                     
                 </Container>
