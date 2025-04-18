@@ -1,6 +1,10 @@
 ﻿import {Box, Button, Paper, TextField, Typography} from "@mui/material";
 
-export default function ActivityForm() {
+type Props = {
+    createActivityOff: () => void
+}
+
+export default function ActivityForm({createActivityOff} : Props) {
     return (
         <Paper sx={{borderRadius : 3, padding:3}}>
             <Typography variant={"h5"} gutterBottom color={"primary"}>
@@ -17,7 +21,7 @@ export default function ActivityForm() {
                 <TextField label={"City"}/>
                 <TextField label={"Venue"}/>
                 <Box display={"flex"} justifyContent={"end"} gap={3}>
-                    <Button color={"inherit"}>Cancel</Button>
+                    <Button color={"inherit"} onClick={createActivityOff}>Cancel</Button>
                     <Button color={"success"} variant={"contained"}>Submit</Button>
                 </Box>
             </Box>

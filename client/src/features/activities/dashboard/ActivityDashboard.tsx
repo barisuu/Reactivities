@@ -8,9 +8,11 @@ type Props = {
     selectActivity: (id: string) => void
     cancelSelectActivity: () => void
     selectedActivity: Activity | undefined
+    createActivityOff: () => void
+    createActivityStatus: boolean
 }
 
-export default function ActivityDashboard({activities, selectedActivity, selectActivity, cancelSelectActivity}: Props) {
+export default function ActivityDashboard({activities, selectedActivity, selectActivity, cancelSelectActivity, createActivityOff, createActivityStatus}: Props) {
     return (
         <Grid container spacing={3}>
             <Grid size={7}>
@@ -24,7 +26,7 @@ export default function ActivityDashboard({activities, selectedActivity, selectA
                     activity={selectedActivity} 
                     cancelSelectActivity={cancelSelectActivity} 
                 />}
-                <ActivityForm/>
+                {createActivityStatus && <ActivityForm createActivityOff={createActivityOff} />}
             </Grid>
         </Grid>
     )

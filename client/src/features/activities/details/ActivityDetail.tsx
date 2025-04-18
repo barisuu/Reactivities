@@ -16,7 +16,7 @@ export default function ActivityDetails({activity,cancelSelectActivity}: Props){
             </CardContent>
             <CardActions>
                 <Button color={"primary"}>Edit</Button>
-                <Button color={"inherit"} onClick={cancelSelectActivity}>Cancel</Button>
+                <Button color={"inherit"} onClick={() => cancelSelectActivity()}>Cancel</Button>
             </CardActions>
         </Card>
         
