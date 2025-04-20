@@ -28,7 +28,7 @@ public class GetActivityList
             {
                 logger.LogInformation("Task Cancelled");
             }*/
-            return await context.Activities.ToListAsync(cancellationToken);
+            return await context.Activities.OrderByDescending(a => a.Date).ToListAsync(cancellationToken);
         }
     }
 }
