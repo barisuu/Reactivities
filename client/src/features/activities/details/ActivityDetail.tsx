@@ -1,15 +1,9 @@
-﻿﻿import {Button, Card, CardActions, CardContent, CardMedia, Typography} from "@mui/material";
-import { useActivities } from "../../../lib/hooks/useActivities";
+﻿import {Button, Card, CardActions, CardContent, CardMedia, Typography} from "@mui/material";
+import {Link, useNavigate} from "react-router";
 
-type Props = {
-    selectedActivity : Activity
-    cancelSelectActivity: () => void
-    openForm: (id: string) => void
-}
-
-export default function ActivityDetails({selectedActivity,cancelSelectActivity,openForm}: Props){
-    const {activities} = useActivities();
-    const activity = activities?.find(x => x.id === selectedActivity.id);
+export default function ActivityDetails(){
+    const navigate = useNavigate();
+    const activity = {} as Activity
     
     if(!activity) return <Typography>Loading...</Typography>
     return (
@@ -21,8 +15,11 @@ export default function ActivityDetails({selectedActivity,cancelSelectActivity,o
                 <Typography variant={"body1"}>{activity.description}</Typography>
             </CardContent>
             <CardActions>
-                <Button color={"primary"} onClick={() => openForm(activity.id)}>Edit</Button>
-                <Button color={"inherit"} onClick={() => cancelSelectActivity()}>Cancel</Button>
+                {/*Two ways to route to a separate view. First using component and to, the other is using
+                React's navigate hook to get the navigate method on onClick. 
+                */}
+                <Button component={Link} to={`/activities/${activity.id}`}color={"primary"}>Edit</Button>
+                <Button color={"inherit"} onClick={() => navigate('/activities')}>Cancel</Button>
             </CardActions>
         </Card>
 
